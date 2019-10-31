@@ -13,14 +13,12 @@
         <h1><img src="{{ url_for('static', filename='logo.png')}}" alt="Logo">Vector Space Model</h1> 
     </div>
 
-    {% block content %}
     <div class="search-form">
         <form id="search" method="POST">
             <select name="queries">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
+                {% for o in data %}
+                <option value="{{ o.query }}">{{ o.query }}</option>
+                {% endfor %}
               </select>
               <button id= "btn_search" type=submit >Search</button>
         </form>
@@ -68,5 +66,8 @@
         <img src="{{ url_for('static', filename='logo.png')}}" alt="Logo">
         <a href="#" class="button">Save graph</a>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='actions.js') }}"></script>
 </body>
 </html>
