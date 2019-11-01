@@ -14,7 +14,7 @@
     </div>
 
     <div class="search-form">
-        <form id="search" method="POST">
+        <form id="search" action="/selectQuery" method="POST">
             <select name="queries">
                 {% for o in data %}
                 <option value="{{ o.query }}">{{ o.query }}</option>
