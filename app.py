@@ -1,14 +1,38 @@
 from flask import Flask, render_template
 from flask import request 
 from flask import jsonify
+import json
 import vectorspace
 
 app = Flask(__name__)
+resultData = open("output.json", "r")
+data = resultData.read()
+columns = [{
+    "field": "No. Document", # which is the field's name of data key 
+    "title": "No. Document", # display as the table header's name
+    "sortable": True,
+  },
+  {
+    "field": "Title",
+    "title": "Title",
+    "sortable": True,
+  },
+  {
+    "field": "Sentence",
+    "title": "Sentence",
+    "sortable": False,
+  },
+  {
+    "field": "Ranking coefficient",
+    "title": "Ranking coefficient",
+    "sortable": True,
+  }]
 
 @app.route("/")
+@app.route("/clear")
 def home():
     return render_template("index.html",
-    data = [{'query': 'what similarity laws must be obeyed'}, {'query': 'what are the structural and aeroelastic'}, {'query': 'can a criterion be developed to show'}])
+    qSet = [{'query': 'what similarity laws must be obeyed'}, {'query': 'what are the structural and aeroelastic'}, {'query': 'can a criterion be developed to show'}])
 
 #@app.route("/getQueries", methods = ['GET'])
 #def sendQueries():
@@ -31,9 +55,9 @@ def home():
 @app.route("/selectQuery", methods=['GET','POST'])
 def saveQuery():
     select = request.form.get('queries')
-    selectedQry = str(select)
-    vectorspace.start(selectedQry) #to see what select is
-    return render_template('table.html')
+    selectedQry = str(select) #to see what select is
+    vectorspace.start(selectedQry) #calls VSM start function with parameter
+    return render_template('table.html', data = data, columns = columns)
 
 if __name__ == '__main__':
     app.debug = True
