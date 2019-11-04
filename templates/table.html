@@ -8,33 +8,66 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
         <title>Vector Space Model</title>
+        
+        <script>
+            var test_table = $('#table').DataTable( {
+                "ajax": {
+                    "url": "/selectQuery",
+                    "dataType": "json"
+                },
+                "columns":[
+                    {"data": "No_Document"},
+                    {"data": "Title"},
+                    {"data": "Sentence"},
+                    {"data": "Ranking_coefficient"}
+                ]
+            } );
+        </script>
     </head>
     <body>
         <div class="header">
             <h1><img src="{{ url_for('static', filename='logo.png')}}" alt="Logo">Vector Space Model</h1> 
         </div>
+<div class="container" style="padding: 10px; ">
+            <h1>VSM Results</h1>
+            <br/>
+            <div id="toolbar"></div>
+            <table
+                id="table"
+                data-toggle="true"
+                data-toolbar="#toolbar"
+                data-search="true"
+                data-show-columns="true"
+                data-pagination="true"
+                data-height="500">
 
-          <table class="table table-striped">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col"># Document</th>
-                <th scope="col">Title</th>
-                <th scope="col">Match</th>
-                <th scope="col">Ranking Coefficient</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for document in result %}
-              <tr>
-                <td>{{ document.number }}</td>
-                <td>{{ document.title }}</td>
-                <td>{{ document.match }}</td>
-                <td>{{ document.rank }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+                <thead class="thead-light">
+                    <tr>
+                        {% for c in columns %}
+                        <th scope="col">{{c}}</th>
+                        {%endfor%}
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- {% for v in data %}
+                    <tr>
+                        <td>{{ v.No_Document }}</td>
+                        <td>{{ v.Title }}</td>
+                        <td>{{ v.Sentence }}</td>
+                        <td>{{ v.Ranking_coefficient }}</td>
+                    </tr>
+                    {% endfor %} -->
+                </tbody>
+            </table>
+        </div>
 
-          <a class="button" href="/clear">Clear</a>
+        <a class="button" href="/clear">Clear</a>
+        <a href="/graph" class="button">Precision & Recall</a>
+        <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/addons/datatables.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/addons/datatables.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+        <!-- <script src="{{ url_for('static', filename='js/dataTables.bootstrap.js') }}"></script> -->
     </body>
 </html>
