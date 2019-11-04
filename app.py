@@ -3,11 +3,13 @@ from flask import request
 from flask import jsonify
 import json
 import vectorspace
+import precisionrecall
 
 app = Flask(__name__)
-resultData = open("output.json", "r")
-data = resultData.read()
-columns = [{
+#resultData = open("output.json", "r")
+#data = resultData.read()
+columns = ['Num Document', 'Title', 'Match Sentence', 'Ranking Coefficient']
+'''columns = [{
     "field": "No. Document", # which is the field's name of data key 
     "title": "No. Document", # display as the table header's name
     "sortable": True,
@@ -26,7 +28,7 @@ columns = [{
     "field": "Ranking coefficient",
     "title": "Ranking coefficient",
     "sortable": True,
-  }]
+  }]'''
 
 @app.route("/")
 @app.route("/clear")
@@ -52,12 +54,22 @@ def home():
 #def form():
 #    return render_template('form.html')
 
-@app.route("/selectQuery", methods=['GET','POST'])
+@app.route("/selectQuery", methods=['GET'])
 def saveQuery():
     select = request.form.get('queries')
     selectedQry = str(select) #to see what select is
-    vectorspace.start(selectedQry) #calls VSM start function with parameter
-    return render_template('table.html', data = data, columns = columns)
+    return selectedQry
+
+@app.route("/selectQuery", methods=['GET','POST'])
+def table_display():
+  selected = selectQuery()
+  vsmRes = vectorspace.start(selected) #calls VSM start function with parameter
+  return  render_template('table.html', data = vsmRes, columns = columns)
+
+@app.route("/graph", methods=['GET', 'POST'])
+def graphic():
+  precisionrecall.start()
+  return render_template('graphics.html')
 
 if __name__ == '__main__':
     app.debug = True
