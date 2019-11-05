@@ -4,13 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+        <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
         <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
+        <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
+
+        <link rel="stylesheet" href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css'>
+        <script type="text/javascript" src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='table.css') }}">
         <title>Vector Space Model</title>
     </head>
@@ -18,45 +25,42 @@
         <div class="header">
             <h1><img src="{{ url_for('static', filename='logo.png')}}" alt="Logo">Vector Space Model</h1> 
         </div>
-<div class="container" style="padding: 10px; ">
-            <h1>VSM Results</h1>
-            <br/>
-            <div id="toolbar"></div>
-            <table
-                id="table"
-                data-toggle="true"
-                data-toolbar="#toolbar"
-                data-search="true"
-                data-show-columns="true"
-                data-pagination="true"
-                data-height="500">
 
-                <thead class="thead-light">
-                    <tr>
-                        {% for c in columns %}
-                        <th scope="col">{{c}}</th>
-                        {%endfor%}
-                    </tr>
-                </thead>
-                <tbody style="height: 500px; overflow: scroll;">
-                    {% for v in data %}
-                    <tr>
-                        <td>{{ v.No_Document }}</td>
-                        <td>{{ v.Title }}</td>
-                        <td>{{ v.Sentence }}</td>
-                        <td>{{ v.Ranking_coefficient }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="container" style="padding: 10px; ">
+            {%block content%}
+            <p>Document results for: "<i> {{selected}} </i>" </p>
+            <br/>
+            {% endblock %}
+            <div class="displayTable">
+                <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+                    <thead>
+                        <tr>
+                            {% for c in columns %}
+                            <th scope="col">{{c}}</th>
+                            {%endfor%}
+                        </tr>
+                    </thead>
+                    <tbody >
+                        {% for v in data %}
+                        <tr>
+                            <td>{{ v.No_Document }}</td>
+                            <td>{{ v.Title }}</td>
+                            <td>{{ v.Sentence }}</td>
+                            <td>{{ v.Ranking_coefficient }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="buttons">
             <a class="button" href="/clear">Clear</a>
             <a href="/graph" class="button">Precision & Recall</a>
         </div>
-        
-       <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/dataTables.bootstrap.js') }}"></script>
         <script src="{{ url_for('static', filename='js/dataTables.buttons.min.js') }}"></script>
@@ -65,9 +69,12 @@
             $(document).ready(function() {
                 $('#table').DataTable({
                     "paging" : true,
+                    "scrollX": true,
+                    "scrollY": "500px",
+                    "scrollCollapse" : false,
                     "ordering" : false
                 });
-                $('.dataTables_length').addClass('bs-select');
+                //$('.dataTables_length').addClass('bs-select');
             })
         </script>
     </body>
