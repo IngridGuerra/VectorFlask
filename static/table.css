@@ -17,7 +17,7 @@ html{
 }
 
 .header h1 {
-    color: #285dee;
+    color: #1a237e;
     font-size: 50px;
     text-align: center;
     font-weight: 600;
@@ -34,6 +34,26 @@ html{
     7px 7px rgba(0, 0, 0, 0.02);
 }
 
+p{
+    font-size: 18px;
+}
+
+select{
+    height: auto;
+    font-size: 18px;
+}
+
+.displayTable{
+    height: 60%;
+}
+
+thead{
+    font-weight: 500px;
+    font-size: 40px;
+    text-align: center;
+    align-items: center;
+}
+
 table, td, th, tr {
     border: 1px solid black;
     padding: 10px;
@@ -42,7 +62,10 @@ table, td, th, tr {
 table {
     text-align: center;
     border-collapse: collapse;
+    scroll-behavior: smooth; /*k hace?*/
+
     margin: 0 auto;
+    width: 100%;
 }
 
 td {
@@ -63,85 +86,21 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-table {
-    width: 100%;
-}
-
-thead, tbody, tr, td, th { display: block; }
-
-tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-thead th {
-    height: 30px;
-
-    /*text-align: left;*/
-}
-
-tbody {
-    height: 120px;
-    overflow-y: auto;
-}
-
-thead {
-    /* fallback */
-}
-
-
-tbody td, thead th {
-    width: 19.2%;
-    float: left;
-}
-
 .buttons {
-    margin-top: 50px;
-    margin-left: 470px;
-    margin-bottom: 50px;
+    margin-top: 13px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-around;
     align-items: baseline;
 }
 
 .button {
-    font-family: 'Roboto Condensed';
-    font-size: 18px;
-    color: black; 
-    background-color: #91e5eb; 
-    border: 2px solid #005a61;
-    border-radius: 12px;
-    width: 200px;
-    height: 20px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    text-align: center;
-    display: inline-block;
-    text-decoration: none;
     padding: 10px;
-    margin-right: 20px;
-}
-
-.button:hover {
-    background-color: rgb(46, 161, 182);
-    color: white;
+    height: 50px;
 }
 
 body {
-    font-family: 'Roboto Condensed';
     background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-    background-size: contain;
-    background-repeat: no-repeat;
-    /* background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%); */
-    /* background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%); */
-    /* background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%); */
 }
-
-.row-index {
-    width: 50px;
-    display: inline-block;
-}
-/* .tableFixHead          { overflow-y: auto; height: 500px; }
-.tableFixHead thead th { position: sticky; top: 0; } */
