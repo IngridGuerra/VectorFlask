@@ -6,7 +6,7 @@ Command to run Flask app: python3 -m flask run
 Web page appears in http://127.0.0.1:5000/
 
 # PS. If running on VSCode
-\n 1) To run the project create a Virtual Environment in VSCode to run the app
+1) To run the project create a Virtual Environment in VSCode to run the app
 https://code.visualstudio.com/docs/python/tutorial-flask
 
 #macOS/Linux
@@ -23,6 +23,5 @@ python -m venv env
 4) Import Flask if not installed
 #macOS/Linux
 pip3 install flask
-
 #Windows
 pip install flask
