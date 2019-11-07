@@ -2,6 +2,7 @@ import re
 import math
 import operator
 import json
+from enum import Enum
 
 def processQuery(query):
     letters = re.sub(r'[^a-z]', ' ', query)
@@ -83,8 +84,8 @@ def queryToVector(query, idfDictionary):
 def ranking(queryVector, docsVectors):
     ranks = []
     for doc,index in zip(docsVectors,range(len(docsVectors))):
-        ranks.append((index,dot(queryVector,doc)))
-    ranks.sort(key = operator.itemgetter(1),reverse = True)
+        ranks.append([index,dot(queryVector,doc)])
+    #ranks.sort(key = operator.itemgetter(1),reverse = True)
     return ranks
 
 def getAndCleanTitles(docs):
