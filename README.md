@@ -3,6 +3,7 @@ VSM using Flask as server
 Command to run Flask app: python3 -m flask run
 *Quit 3 if Windows
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Web page appears in http://127.0.0.1:5000/
 
@@ -15,6 +16,13 @@ Web page appears in http://127.0.0.1:5000/
 # PS. If running on VSCode
 \n 1) To run the project create a Virtual Environment in VSCode to run the app
 >>>>>>> 4db1bb8... Update README.md
+=======
+
+Web page appears in http://127.0.0.1:5000/
+
+# PS. If running on VSCode
+1) To run the project create a Virtual Environment in VSCode to run the app
+>>>>>>> caf1ed5d052ea07368bd9450e8763af365a5ecb0
 https://code.visualstudio.com/docs/python/tutorial-flask
 
 #macOS/Linux
@@ -29,15 +37,10 @@ python -m venv env
 3) Run Terminal: Create New Integrated Terminal
 <<<<<<< HEAD
 
-4) Import Flask if not installed
-#macOS/Linux
-pip3 install flask
-=======
 
 4) Import Flask if not installed
 #macOS/Linux
 pip3 install flask
-
->>>>>>> 4db1bb8... Update README.md
+>>>>>>> caf1ed5d052ea07368bd9450e8763af365a5ecb0
 #Windows
 pip install flask
